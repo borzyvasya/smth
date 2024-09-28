@@ -18,29 +18,29 @@ fn main() {
 }
 
 fn solver(a: f32, b: f32, c: f32) {
-        let discriminant: f32 = b*b - 4.0 * a * c;
-        println!("{}", discriminant);
+    let discriminant: f32 = b*b - 4.0 * a * c;
+    println!("{}", discriminant);
         
-        if discriminant < 0.0 {
-            println!("no solution")
-        }
+    if discriminant < 0.0 {
+        println!("no solution")
+    }
         
-        match discriminant {
-            d if d > 0.0 => {
-                let t1 = (-b + d.sqrt()) / (2.0*a);
-                let t2 = (-b - d.sqrt()) / (2.0*a); 
+    match discriminant {
+        d if d > 0.0 => {
+            let t1 = (-b + d.sqrt()) / (2.0*a);
+            let t2 = (-b - d.sqrt()) / (2.0*a); 
                 
-                let x1: f32 = t1.sqrt();
-                let x2: f32 = t2.sqrt(); 
+            let x1: f32 = t1.sqrt();
+            let x2: f32 = t2.sqrt(); 
                 
-                println!("{}, {}, {}, {}", -x1, -x2, x1, x2)
-            }
-            0.0 => {
-                let x = b/(2.0*a);
-                println!("{}, {}", -x, x);
-            }
-            _ => println!("no solution"),
+            println!("{}, {}, {}, {}", -x1, -x2, x1, x2)
         }
+        0.0 => {
+            let x = b/(2.0*a);
+            println!("{}, {}", -x, x);
+        }
+        _ => println!("no solution"),
+    }
 }
 
 
