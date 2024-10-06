@@ -1,5 +1,6 @@
 use rand::Rng;
 
+
 fn main() {
     let row = 10;
     let column = 10;
@@ -51,5 +52,3 @@ fn main() {
     }
     
 }
-
-
