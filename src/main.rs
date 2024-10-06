@@ -1,46 +1,55 @@
-use std::io;
+use rand::Rng;
 
 fn main() {
-    let mut input_a = String::new();
-    io::stdin().read_line(&mut input_a).expect("");
-    let a = input_a.trim().parse::<f32>();
+    let row = 10;
+    let column = 10;
     
-    let mut input_b = String::new();
-    io::stdin().read_line(&mut input_b).expect("");
-    let b = input_b.trim().parse::<f32>();
-    
-    let mut input_c = String::new();
-    io::stdin().read_line(&mut input_c).expect("");
-    let c = input_c.trim().parse::<f32>();
-    
-    solver(a.expect("msg"), b.expect("msg"), c.expect("msg"));
- 
-}
+    let mut matrix: Vec<Vec<i32>> = vec![vec![0; column]; row];
+    let mut rng = rand::thread_rng();
 
-fn solver(a: f32, b: f32, c: f32) {
-        let discriminant: f32 = b*b - 4.0 * a * c;
-        println!("{}", discriminant);
-        
-        if discriminant < 0.0 {
-            println!("no solution")
+    
+    for i in 0..row {
+        for j in 0..column {
+            matrix[i][j] = rng.gen_range(1..=15);
         }
-        
-        match discriminant {
-            d if d > 0.0 => {
-                let t1 = (-b + d.sqrt()) / (2.0*a);
-                let t2 = (-b - d.sqrt()) / (2.0*a); 
-                
-                let x1: f32 = t1.sqrt();
-                let x2: f32 = t2.sqrt(); 
-                
-                println!("{}, {}, {}, {}", -x1, -x2, x1, x2)
-            }
-            0.0 => {
-                let x = b/(2.0*a);
-                println!("{}, {}", -x, x);
-            }
-            _ => println!("no solution"),
+    }
+    
+    for i in 0..row {
+        for j in 0..column {
+            print!("{} ", matrix[i][j])
         }
+        println!("")
+    }
+    
+    let mut multiplication = 1;
+    for i in 0..row {
+        multiplication *= matrix[i][i];
+    }
+    
+    println!("{:?}", multiplication);
+    
+    
+    let mut submult = 1;
+    for i in 0..row {
+        submult *= matrix[i][row - i - 1];
+    }
+    println!("{:?}", submult);
+    
+    for i in 0..row {
+        for j in 0..column {
+            if j > row - i - 1 {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    
+    for i in 0..row {
+        for j in 0..column {
+            print!("{} ", matrix[i][j])
+        }
+        println!("")
+    }
+    
 }
 
 
